@@ -11,6 +11,7 @@ var cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var alvosRouter = require('./routes/alvos');
 var projectsRouter = require('./routes/projects');
 var authenticationsRouter = require('./routes/authentication');
 var pagesRouter = require('./routes/pages');
@@ -19,8 +20,8 @@ var app = express();
 app.use(cors());
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/', indexRouter);
 app.use('/', pagesRouter);
 app.use('/users', usersRouter);
+app.use('/alvos', alvosRouter);
 app.use('/projects', projectsRouter);
 app.use('/authentications', authenticationsRouter);
 

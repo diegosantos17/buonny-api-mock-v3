@@ -19,6 +19,8 @@ var mensagensRouter = require('./routes/informacoes_recebidas/mensagens');
 var mensagensRecebidasRouter = require('./routes/informacoes_recebidas/mensagens_recebidas');
 var authenticationsRouter = require('./routes/authentication');
 
+var enviosRouter = require('./routes/informacoes_enviadas/envios');
+
 var app = express();
 app.use(cors());
 
@@ -43,6 +45,7 @@ app.use('/informacoes_recebidas/mensagens_livres', mensagensRouter);
 app.use('/informacoes_recebidas/mensagens_recebidas', mensagensRecebidasRouter);
 app.use('/informacoes_recebidas/sensores', sensoresRouter);
 
+app.use('/informacoes_enviadas/envios', enviosRouter);
 
 app.use('/authentications', authenticationsRouter);
 

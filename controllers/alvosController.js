@@ -10,7 +10,7 @@ exports.list = function(req, res, next) {
           "referencia": [
             {
               "refe_codigo": 1,
-              "refe_descricao": "teste",
+              "refe_descricao": "teste para o Dedé",
               "refe_endereco_empresa_terceiro": "string",
               "refe_bairro_empresa_terceiro": "string",
               "refe_inativo": "string",

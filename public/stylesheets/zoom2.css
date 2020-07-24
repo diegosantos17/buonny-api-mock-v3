@@ -1,0 +1,44 @@
+.div-zoom {
+    border: 1px solid red;
+    background-color: yellow;
+    display: inline-block;
+    min-width: 100px;
+    min-height: 100px;
+    max-width: 100%;
+    max-height: 100vh;
+}
+
+.container{
+    border: none;    
+}
+
+
+
+/* div[class^="col-"]{
+    border: 1px solid blue;    
+} */
+
+.meao-container{
+    border: 1px solid blue;
+}
+.meao-content{
+    text-align: center;
+}
+
+.h-100vh{
+    height: 100vh;
+}
+
+.full-center {
+    margin: 0;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    text-align: center;    
+    border: 1px solid orange;
+    display: inline-block;
+    width: 100%;
+  }
+

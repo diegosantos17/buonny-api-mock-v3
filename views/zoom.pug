@@ -1,0 +1,11 @@
+extends layout
+
+block head
+  link(rel='stylesheet', href='/stylesheets/zoom.css')
+
+block content
+  h1= title
+  p Bem vindo #{title}
+  <canvas></canvas>
+  
+  script(src='/javascripts/zoom.js')

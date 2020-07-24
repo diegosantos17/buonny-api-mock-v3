@@ -9,12 +9,9 @@ var logger = require('morgan');
 var cors = require('cors');
 
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var alvosRouter = require('./routes/alvos');
-var projectsRouter = require('./routes/projects');
+var atuadoresRouter = require('./routes/veiculos/atuadores');
 var authenticationsRouter = require('./routes/authentication');
-var pagesRouter = require('./routes/pages');
 
 var app = express();
 app.use(cors());
@@ -30,10 +27,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/', indexRouter);
-app.use('/', pagesRouter);
-app.use('/users', usersRouter);
+
 app.use('/locais', alvosRouter);
-app.use('/projects', projectsRouter);
+app.use('/veiculos/atuadores', atuadoresRouter);
 app.use('/authentications', authenticationsRouter);
 
 

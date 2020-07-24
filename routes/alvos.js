@@ -5,6 +5,6 @@ var utils = require('./utils');
 var alvos_controller = require('../controllers/alvosController');
 
 // GET catalog home page.
-router.get('/', alvos_controller.list);
+router.get('/referencia', alvos_controller.list);
 
 module.exports = router;

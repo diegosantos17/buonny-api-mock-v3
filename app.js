@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/', indexRouter);
 app.use('/', pagesRouter);
 app.use('/users', usersRouter);
-app.use('/alvos', alvosRouter);
+app.use('/locais', alvosRouter);
 app.use('/projects', projectsRouter);
 app.use('/authentications', authenticationsRouter);
 

@@ -14,6 +14,7 @@ var atuadoresRouter = require('./routes/veiculos/atuadores');
 var macrosRouter = require('./routes/informacoes_recebidas/macros');
 var temposRouter = require('./routes/informacoes_recebidas/tempos');
 var eventosRouter = require('./routes/informacoes_recebidas/eventos');
+var sensoresRouter = require('./routes/informacoes_recebidas/sensores');
 var mensagensRouter = require('./routes/informacoes_recebidas/mensagens');
 var authenticationsRouter = require('./routes/authentication');
 
@@ -38,6 +39,7 @@ app.use('/informacoes_recebidas/macros_enviadas_motorista', macrosRouter);
 app.use('/informacoes_recebidas/tempos', temposRouter);
 app.use('/informacoes_recebidas/eventos', eventosRouter);
 app.use('/informacoes_recebidas/mensagens_livres', mensagensRouter);
+app.use('/informacoes_recebidas/sensores', sensoresRouter);
 
 
 app.use('/authentications', authenticationsRouter);

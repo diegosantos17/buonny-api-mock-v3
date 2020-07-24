@@ -12,6 +12,7 @@ var cors = require('cors');
 var alvosRouter = require('./routes/alvos');
 var atuadoresRouter = require('./routes/veiculos/atuadores');
 var macrosRouter = require('./routes/informacoes_recebidas/macros');
+var temposRouter = require('./routes/informacoes_recebidas/tempos');
 var authenticationsRouter = require('./routes/authentication');
 
 var app = express();
@@ -32,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/locais', alvosRouter);
 app.use('/veiculos/atuadores', atuadoresRouter);
 app.use('/informacoes_recebidas/macros_enviadas_motorista', macrosRouter);
+app.use('/informacoes_recebidas/tempos', temposRouter);
 
 app.use('/authentications', authenticationsRouter);
 

@@ -1,0 +1,1233 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Containers - API V3",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://tstapi.buonny.com.br/api/v3/",
+            "description": "Homologação"
+        },
+        {
+            "url": "http://localhost:8088/api/v3/",
+            "description": "Local"
+        },
+        {
+            "url": "https://buonny-mock-api-v3.herokuapp.com/",
+            "description": "Mock Server"
+        }
+    ],
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Cria Token para transitar api",
+                "description": "Cria Token para transitar api",
+                "operationId": "criaToken",
+                "requestBody": {
+                    "description": "Dados para gerar token",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "token": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "token": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "BadRequest, erro de requisição",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/badRequest"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "InternalError, erro interno",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/internalError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/container/motivo_inativacao_container": {
+            "get": {
+                "tags": [
+                    "motivo_inativacao_container"
+                ],
+                "summary": "Busca Motivos de Inativação de Container",
+                "description": "Busca Motivos dos Inativação de Container para listagem",
+                "operationId": "buscaTodosMotivosInativacaoContainer",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/MoicInativacaoContainer_codigo"
+                    },
+                    {
+                        "$ref": "#/components/parameters/MoicInativacaoContainer_descricao"
+                    },
+                    {
+                        "$ref": "#/components/parameters/page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/sort"
+                    },
+                    {
+                        "$ref": "#/components/parameters/direction"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna array com os motivos de inativação de container",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "motivos_inativacao_container": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/MoicMotivoInativacaoResp"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "type": "object"
+                                        },
+                                        "paging": {
+                                            "type": "object",
+                                            "$ref": "#/components/schemas/paging"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "BadRequest, erro de requisição",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/badRequest"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NotFound, erro de busca",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/notFound"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "NotFound, erro de autorização",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/unhautorized"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "AutorizaBuonnyV3": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "motivo_inativacao_container"
+                ],
+                "summary": "Salva um motivo de inativação de container no banco",
+                "description": "Salva um motivo de inativação de container no banco",
+                "operationId": "salvaUmMotivoInativacaoContainer",
+                "requestBody": {
+                    "description": "Dados para salvar motivo de inativação de container",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "moic_descricao": {
+                                        "type": "string"
+                                    },
+                                    "moic_pjur_pess_oras_codigo": {
+                                        "type": "integer"
+                                    },
+                                    "moic_inativo": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Salvo com sucesso!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "motivo_inativacao_container": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/MoicMotivoInativacaoContainer"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "BadRequest, erro de requisição",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/badRequest"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, erro de autorização",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/unhautorized"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "InternalError, erro interno",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/internalError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "AutorizaBuonnyV3": []
+                    }
+                ]
+            }
+        },
+        "/container/motivo_inativacao_container/{id}": {
+            "get": {
+                "tags": [
+                    "motivo_inativacao_container"
+                ],
+                "summary": "Busca motivo de inativacao de container especifico",
+                "description": "Busca dados de um motivo de inativacao de container",
+                "operationId": "buscaUmMotivoInativacaoContainer",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id para busca do motivo de inativação de container",
+                        "required": true,
+                        "explode": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna motivo de inativação de container específico",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "motivo_inativacao_container": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/MoicMotivoInativacaoContainer"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "BadRequest, erro de requisição",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/badRequest"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NotFound, erro de busca",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/notFound"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, erro de autorização",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/unhautorized"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "AutorizaBuonnyV3": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "motivo_inativacao_container"
+                ],
+                "summary": "Edita motivo de inativação de container no banco",
+                "description": "Edita motivo de inativação de container no banco",
+                "operationId": "editaUmMotivoInativacaoContainer",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do motivo que deseja editar",
+                        "required": true,
+                        "explode": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Dados para editar região",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "moic_descricao": {
+                                        "type": "string"
+                                    },
+                                    "moic_inativo": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Salvo com sucesso!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "motivo_inativacao_container": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/MoicMotivoInativacaoContainer"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "BadRequest, erro de requisição",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/badRequest"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NotFound, erro de busca",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/notFound"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, erro de autorização",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/unhautorized"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "InternalError, erro interno",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/internalError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "AutorizaBuonnyV3": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "MoicMotivoInativacaoResp": {
+                "title": "MoicMotivoInativacaoResp",
+                "properties": {
+                    "codigo": {
+                        "description": "Código do motivo de inativação",
+                        "type": "integer"
+                    },
+                    "descricao": {
+                        "description": "Descrição do motivo de inativação",
+                        "type": "string"
+                    },
+                    "pjur_codigo": {
+                        "description": "Codigo cliente no trafegus",
+                        "type": "integer"
+                    },
+                    "data_inativacao": {
+                        "description": "Data do motivo de inativação do container",
+                        "type": "integer"
+                    },
+                    "data_cadastro": {
+                        "description": "Data de cadastro do motivo de inativação do container",
+                        "type": "integer"
+                    },
+                    "data_alteracao": {
+                        "description": "Data de alteração do motivo de inativação do container",
+                        "type": "integer"
+                    },
+                    "usuario_adicionou": {
+                        "description": "Usuário que adicionou o motivo de inativação do container",
+                        "type": "integer"
+                    },
+                    "usuario_alterou": {
+                        "description": "Usuário que alterou o motivo de inativação do container",
+                        "type": "integer"
+                    },
+                    "usuario_inativou": {
+                        "description": "Usuário que inativou o motivo de inativação do container",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "MoicMotivoInativacaoContainer": {
+                "title": "MoicMotivoInativacaoContainer",
+                "description": "Model de Motivos de Inativação de Container",
+                "properties": {
+                    "moic_codigo": {
+                        "type": "integer"
+                    },
+                    "moic_descricao": {
+                        "type": "string"
+                    },
+                    "moic_pjur_pess_oras_codigo": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "paging": {
+                "title": "Paging",
+                "description": "Paging",
+                "properties": {
+                    "finder": {
+                        "type": "string"
+                    },
+                    "page": {
+                        "type": "integer"
+                    },
+                    "current": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "perPage": {
+                        "type": "integer"
+                    },
+                    "start": {
+                        "type": "integer"
+                    },
+                    "end": {
+                        "type": "integer"
+                    },
+                    "prevPage": {
+                        "type": "boolean"
+                    },
+                    "nextPage": {
+                        "type": "boolean"
+                    },
+                    "pageCount": {
+                        "type": "integer"
+                    },
+                    "sort": {
+                        "type": "string"
+                    },
+                    "direction": {
+                        "type": "string"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "sortDefault": {
+                        "type": "boolean"
+                    },
+                    "directionDefault": {
+                        "type": "boolean"
+                    },
+                    "scope": {
+                        "type": "string"
+                    },
+                    "completeSort": {
+                        "type": "array",
+                        "items": {}
+                    }
+                },
+                "type": "object"
+            },
+            "badRequest": {
+                "title": "BadRequest | StatusCode 400",
+                "description": "BadRequest",
+                "properties": {
+                    "data": {
+                        "type": "object"
+                    },
+                    "message": {
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "notFound": {
+                "title": "NotFound | StatusCode 404",
+                "description": "NotFound",
+                "properties": {
+                    "data": {
+                        "type": "object"
+                    },
+                    "message": {
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "internalError": {
+                "title": "InternalError | StatusCode 500",
+                "description": "InternalError",
+                "properties": {
+                    "data": {
+                        "type": "object"
+                    },
+                    "message": {
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "unhautorized": {
+                "title": "Unhautorized | StatusCode 401",
+                "description": "Unhautorized",
+                "properties": {
+                    "data": {
+                        "type": "object"
+                    },
+                    "message": {
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "parameters": {
+            "page": {
+                "name": "page",
+                "in": "query",
+                "description": "Página a ser buscada",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "sort": {
+                "name": "sort",
+                "in": "query",
+                "description": "Campo a ser ordenado",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "direction": {
+                "name": "direction",
+                "in": "query",
+                "description": "Direção a ser ordenado",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "limit": {
+                "name": "limit",
+                "in": "query",
+                "description": "Quantidade de resgistros a ser retornado",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "MoicInativacaoContainer_codigo": {
+                "name": "codigo_cliente",
+                "in": "query",
+                "description": "Código do cliente para busca",
+                "required": true,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "MoicInativacaoContainer_descricao": {
+                "name": "descricao",
+                "in": "query",
+                "description": "Descrição de motivo de inativação de container",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "ClientesReq_codigo": {
+                "name": "codigo",
+                "in": "query",
+                "description": "Código do cliente para busca",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "ClientesReq_codigo_documento": {
+                "name": "codigo_documento",
+                "in": "query",
+                "description": "Código do documento (CPF ou CPNJ)",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "string",
+                    "maxLength": 18
+                }
+            },
+            "ClientesReq_razao_social": {
+                "name": "razao_social",
+                "in": "query",
+                "description": "Nome da razão social",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "string",
+                    "maxLength": 255
+                }
+            },
+            "ClientesReq_inscricao_estadual": {
+                "name": "inscricao_estadual",
+                "in": "query",
+                "description": "Incrição estadual",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "string",
+                    "maxLength": 20
+                }
+            },
+            "ClientesReq_ativo": {
+                "name": "ativo",
+                "in": "query",
+                "description": "Buscar por ativo ou inativo",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "integer",
+                    "maxLength": 1
+                }
+            },
+            "ClientesReq_codigo_cliente_tipo": {
+                "name": "codigo_cliente_tipo",
+                "in": "query",
+                "description": "Código do tipo cliente",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "ClientesReq_ultima_atualizacao": {
+                "name": "ultima_atualizacao",
+                "in": "query",
+                "description": "Data da ultima atualização",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "string",
+                    "maxLength": 10
+                }
+            },
+            "ClientesReq_codigo_gestor": {
+                "name": "codigo_gestor",
+                "in": "query",
+                "description": "Código do gestor",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "ClientesReq_codigo_gestor_npe": {
+                "name": "codigo_gestor_npe",
+                "in": "query",
+                "description": "Código do gestor NPE",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "ClientesReq_codigo_cliente_sub_tipo": {
+                "name": "codigo_cliente_sub_tipo",
+                "in": "query",
+                "description": "Código subtipo cliente",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "ClientesReq_codigo_corretora": {
+                "name": "codigo_corretora",
+                "in": "query",
+                "description": "Código corretora",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "ClientesReq_codigo_seguradora": {
+                "name": "codigo_seguradora",
+                "in": "query",
+                "description": "Código seguradora",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "ClientesReq_codigo_endereco_regiao": {
+                "name": "codigo_endereco_regiao",
+                "in": "query",
+                "description": "Código endereço região",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "ClientesReq_filterbyid": {
+                "name": "id",
+                "in": "path",
+                "description": "Código do cliente para busca",
+                "required": true,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "ClientesSubtiposReq_codigo_tipo_cliente": {
+                "name": "codigo_tipo_cliente",
+                "in": "query",
+                "description": "Código do tipo cliente para busca",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "CorretorasReq_nome_corretora": {
+                "name": "nome_corretora",
+                "in": "query",
+                "description": "Nome da corretora",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "string",
+                    "minLength": 3
+                }
+            },
+
+            "CidadeReq_esta_codigo": {
+                "name": "esta_codigo",
+                "in": "query",
+                "description": "Código do estado para busca",
+                "required": true,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "EnderecoReq_cep": {
+                "name": "cep",
+                "in": "query",
+                "description": "Cep para busca de endereço",
+                "required": true,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "EstadoReq_pais_codigo": {
+                "name": "pais_codigo",
+                "in": "query",
+                "description": "Código do país para busca",
+                "required": true,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "RegioesReq_codigo_cliente": {
+                "name": "codigo_cliente",
+                "in": "query",
+                "description": "Código cliente para busca de regiões",
+                "required": true,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "RegioesReq_descricao": {
+                "name": "descricao",
+                "in": "query",
+                "description": "Descrição para busca de regiões",
+                "explode": true,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "CnaeReq_cnae": {
+                "name": "cnae",
+                "in": "query",
+                "description": "Cnae para busca",
+                "required": true,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "EmbarcadoresTransportadoresDeleteReq_id": {
+                "name": "id",
+                "in": "path",
+                "description": "Id do cliente vinculado",
+                "required": true,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "EmbarcadoresTransportadoresDeleteReq_codigo_cliente": {
+                "name": "codigo_cliente",
+                "in": "query",
+                "description": "Código cliente para busca de embarcadores e transportadores",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "EmbarcadoresTransportadoresReq_codigo_cliente": {
+                "name": "codigo_cliente",
+                "in": "query",
+                "description": "Código do cliente para busca de embarcadores e transportadores",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "EmbarcadoresTransportadoresReq_codigo_documento": {
+                "name": "codigo_documento",
+                "in": "query",
+                "description": "CNPJ ou CPF para busca de embarcadores e transportadores",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "string",
+                    "maxLength": 18
+                }
+            },
+            "EmbarcadoresTransportadoresReq_razao_social": {
+                "name": "razao_social",
+                "in": "query",
+                "description": "Razão social para busca de embarcadores e transportadores",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "string",
+                    "maxLength": 255
+                }
+            },
+            "EmbarcadoresTransportadoresContatoEditReq_id": {
+                "name": "id",
+                "in": "path",
+                "description": "Codigo do cliente embarcador/transportador para busca de contatos",
+                "required": true,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "EmbarcadoresTransportadoresContatoViewReq_id": {
+                "name": "id",
+                "in": "path",
+                "description": "Codigo do cliente embarcador/transportador para busca de contatos",
+                "required": true,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "PrestadoresReq_documento": {
+                "name": "documento",
+                "in": "query",
+                "description": "Codigo do documento para filtro de prestador",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "PrestadoresReq_razao_social": {
+                "name": "razao_social",
+                "in": "query",
+                "description": "Razão Social para filtro de prestador",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "PrestadoresEditReq_id": {
+                "name": "id",
+                "in": "path",
+                "description": "Id de prestador",
+                "required": true,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "PrestadoresContatoReq_codigo_prestador": {
+                "name": "codigo_prestador",
+                "in": "query",
+                "description": "Codigo prestador para busca de Endereços de prestador",
+                "required": true,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "PrestadoresEnderecoReq_prestador": {
+                "name": "prestador",
+                "in": "query",
+                "description": "Codigo prestador para busca de endereços de prestador",
+                "required": true,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "ReguladorDeleteReq_id": {
+                "name": "id",
+                "in": "path",
+                "description": "Id para deleter o regulador",
+                "required": true,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "ReguladorEditReq_id": {
+                "name": "id",
+                "in": "path",
+                "description": "Id do regulador que deseja fazer edição",
+                "required": true,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "ReguladorViewReq_id": {
+                "name": "id",
+                "in": "path",
+                "description": "Id para busca do Regulador",
+                "required": true,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "ReguladoresReq_codigo_seguradora": {
+                "name": "codigo_seguradora",
+                "in": "query",
+                "description": "Código seguradora para busca de reguladores",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "ReguladoresReq_nome_regulador": {
+                "name": "nome_regulador",
+                "in": "query",
+                "description": "Nome do Regulador para busca de reguladores",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "ReguladoresReq_documento": {
+                "name": "documento",
+                "in": "query",
+                "description": "Número documento (CNPJ) para busca de reguladores",
+                "required": false,
+                "explode": true,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "ReguladoresContatoReq_codigo_regulador": {
+                "name": "codigo_regulador",
+                "in": "query",
+                "description": "Codigo regulador para busca de Endereços de regulador",
+                "required": true,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "ReguladorEnderecoDeleteReq_id": {
+                "name": "id",
+                "in": "path",
+                "description": "Id para deleter o endereco do regulador",
+                "required": true,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "ReguladoresEnderecosAddReq_id_regulador": {
+                "name": "id_regulador",
+                "in": "path",
+                "description": "Id para adicionar endereços do regulador",
+                "required": true,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "ReguladoresEnderecosEditReq_id": {
+                "name": "id",
+                "in": "path",
+                "description": "Id para adicionar endereços do regulador",
+                "required": true,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "ReguladoresEnderecosViewByIdReq_id": {
+                "name": "id",
+                "in": "path",
+                "description": "Id para exibir endereço do regulador especifico",
+                "required": true,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "ReguladoresEnderecosIndexReq_id_regulador": {
+                "name": "id_regulador",
+                "in": "path",
+                "description": "Id para listar endereços do regulador",
+                "required": true,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "ReguladoresEnderecosIndex1Req_id_regulador": {
+                "name": "id_regulador",
+                "in": "path",
+                "description": "Id para listar endereços do regulador",
+                "required": true,
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "TipoContatoReq_contexto": {
+                "name": "contexto",
+                "in": "query",
+                "description": "Contexto que deseja combo de tipos de contatos",
+                "explode": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+
+        },
+        "securitySchemes": {
+            "AutorizaBuonnyV3": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "auth",
+            "description": "Autenticação Buonny"
+        },
+        {
+            "name": "motivo_inativacao_container",
+            "description": ""
+        }
+    ]
+}

@@ -1,0 +1,324 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Terminais - API V3",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://tstapi.buonny.com.br/api/v3/",
+            "description": "Homologação"
+        },
+        {
+            "url": "http://localhost:8088/api/v3/",
+            "description": "Local"
+        },
+        {
+            "url": "https://buonny-mock-api-v3.herokuapp.com/",
+            "description": "Mock Server"
+        }
+    ],
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Cria Token para transitar api",
+                "description": "Cria Token para transitar api",
+                "operationId": "criaToken",
+                "requestBody": {
+                    "description": "Dados para gerar token",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "token": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "token": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "BadRequest, erro de requisição",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/badRequest"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "InternalError, erro interno",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/internalError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/terminais/tecnologias": {
+            "get": {
+                "tags": [
+                    "tecnologias"
+                ],
+                "summary": "Busca Tecnologias de terminais",
+                "description": "Busca Tecnologias de terminais",
+                "operationId": "buscaTecnologias",
+                "parameters": [
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna array com os Tecnologias de Terminais",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "tecnologias": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/TecnTecnologiaIndexResp"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "type": "object"
+                                        },
+                                        "paging": {
+                                            "type": "object",
+                                            "$ref": "#/components/schemas/paging"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "BadRequest, erro de requisição",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/badRequest"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NotFound, erro de busca",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/notFound"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "NotFound, erro de autorização",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/unhautorized"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "AutorizaBuonnyV3": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "TecnTecnologiaIndexResp": {
+                "title": "TecnTecnologiaIndexResp",
+                "properties": {
+                    "codigo": {
+                        "description": "Código da tecnologia",
+                        "type": "integer"
+                    },
+                    "descricao": {
+                        "description": "Descrição da tecnologia",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "paging": {
+                "title": "Paging",
+                "description": "Paging",
+                "properties": {
+                    "finder": {
+                        "type": "string"
+                    },
+                    "page": {
+                        "type": "integer"
+                    },
+                    "current": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "perPage": {
+                        "type": "integer"
+                    },
+                    "start": {
+                        "type": "integer"
+                    },
+                    "end": {
+                        "type": "integer"
+                    },
+                    "prevPage": {
+                        "type": "boolean"
+                    },
+                    "nextPage": {
+                        "type": "boolean"
+                    },
+                    "pageCount": {
+                        "type": "integer"
+                    },
+                    "sort": {
+                        "type": "string"
+                    },
+                    "direction": {
+                        "type": "string"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "sortDefault": {
+                        "type": "boolean"
+                    },
+                    "directionDefault": {
+                        "type": "boolean"
+                    },
+                    "scope": {
+                        "type": "string"
+                    },
+                    "completeSort": {
+                        "type": "array",
+                        "items": {}
+                    }
+                },
+                "type": "object"
+            },
+            "badRequest": {
+                "title": "BadRequest | StatusCode 400",
+                "description": "BadRequest",
+                "properties": {
+                    "data": {
+                        "type": "object"
+                    },
+                    "message": {
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "notFound": {
+                "title": "NotFound | StatusCode 404",
+                "description": "NotFound",
+                "properties": {
+                    "data": {
+                        "type": "object"
+                    },
+                    "message": {
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "internalError": {
+                "title": "InternalError | StatusCode 500",
+                "description": "InternalError",
+                "properties": {
+                    "data": {
+                        "type": "object"
+                    },
+                    "message": {
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "unhautorized": {
+                "title": "Unhautorized | StatusCode 401",
+                "description": "Unhautorized",
+                "properties": {
+                    "data": {
+                        "type": "object"
+                    },
+                    "message": {
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "AutorizaBuonnyV3": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "auth",
+            "description": "Autenticação Buonny"
+        },
+        {
+            "name": "tecnologias",
+            "description": ""
+        }
+    ]
+}

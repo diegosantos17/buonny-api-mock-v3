@@ -9,51 +9,51 @@ exports.list = function(req, res, next) {
         "data": {
           "atuadores": [
             {
-              "codigo": 6,
+              "codigo": '000006    ',
               "descricao": "ALARME (SIRENE)"
             },
             {
-              "codigo": 3,
+              "codigo": '000003    ',
               "descricao": "BLOQUEIO"
             },            
             {
-              "codigo": 10,
+              "codigo": '000010    ',
               "descricao": "BOTÃO DE PÂNICO"
             },
             {
-              "codigo": 2,
+              "codigo": '000002    ',
               "descricao": "DESENGATE DE CARRETA"
             },
             {
-              "codigo": 12,
+              "codigo": '000012    ',
               "descricao": "SENSOR DE BAÚ"
             },
             {
-              "codigo": 11,
+              "codigo": '000011    ',
               "descricao": "SENSOR DE IGNIÇÃO"
             },
             {
-              "codigo": 8,
+              "codigo": '000008    ',
               "descricao": "SENSOR DE PAINEL"
             },
             {
-              "codigo": 4,
+              "codigo": '000004    ',
               "descricao": "SENSOR DE PORTA DO CARONA"
             },
             {
-              "codigo": 7,
+              "codigo": '000007    ',
               "descricao": "SENSOR DE PORTA DO MOTORISTA"
             },
             {
-              "codigo": 9,
+              "codigo": '000009    ',
               "descricao": "TECLADO DE COMUNICAÇÃO"
             },
             {
-              "codigo": 5,
+              "codigo": '000005    ',
               "descricao": "TRAVA DA 5ª RODA"
             },
             {
-              "codigo": 5,
+              "codigo": '000001    ',
               "descricao": "TRAVA DE BAU"
             }
           ] 
@@ -76,7 +76,7 @@ exports.list = function(req, res, next) {
           "sortDefault": true,
           "directionDefault": true,
           "scope": "string",
-          "completeSort": [            
+          "completeSort": [
           ]
         }
     }

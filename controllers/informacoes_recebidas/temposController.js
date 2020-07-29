@@ -9,25 +9,37 @@ exports.list = function(req, res, next) {
       "data": {
         "tempos": [
           {
-            "inicio": "2020-07-10 11:00:00",
-            "fim": "2020-07-10 11:50:00",
-            "posicao": "1.222, 3.4444",
-            "em_viagem": true,
-            "parado": false
+            "placa"      : "OZJ2138",
+            "inicio"     : "07/07/2020 01:50:40",
+            "fim"        : "07/07/2020 02:01:20",
+            "latitude"   : "-19.6315994263",
+            "longitude"  : "-46.9826011658",
+            "posicao"    : "6,080 KM DE ARAXA - MG",
+            "macro"      : "EM MANOBRA",
+            "status"     : "Em viagem",
+            "tempo"      : "00:10"
           },
           {
-            "inicio": "2020-07-10 12:00:00",
-            "fim": "2020-07-10 13:30:00",
-            "posicao": "1.222, 3.4444",
-            "em_viagem": true,
-            "parado": false
+            "placa"      : "OZJ2138",
+            "inicio"     : "07/07/2020 01:50:40",
+            "fim"        : "07/07/2020 02:01:20",
+            "latitude"   : "-19.6315994263",
+            "longitude"  : "-46.9826011658",
+            "posicao"    : "6,080 KM DE ARAXA - MG",
+            "macro"      : "EM MANOBRA",
+            "status"     : "Parado",
+            "tempo"      : "00:34"
           },
           {
-            "inicio": "2020-07-10 14:00:00",
-            "fim": "2020-07-10 18:00:00",
-            "posicao": "0.777, 1.8888",
-            "em_viagem": false,
-            "parado": true
+            "placa"      : "OZJ2138",
+            "inicio"     : "07/07/2020 01:50:40",
+            "fim"        : "07/07/2020 02:01:20",
+            "latitude"   : "-19.6315994263",
+            "longitude"  : "-46.9826011658",
+            "posicao"    : "6,080 KM DE ARAXA - MG",
+            "macro"      : "EM MANOBRA",
+            "status"     : "Em viagem",
+            "tempo"      : "01:30"
           }
         ]
       },

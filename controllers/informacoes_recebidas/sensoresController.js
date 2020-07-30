@@ -9,21 +9,21 @@ exports.list = function(req, res, next) {
       "data": {
         "sensores": [
           {            
-            "periferico": "Loren Ipsum 1",
-            "evento": "Loren Ipsum 2",
-            "valor": "100.00",            
-            "data": "2020-07-10 1:00:00"
+            "periferico": "ANTENA GPS (LOCALIZACAO)",
+            "evento": "EVENTO DE PERDA DE SINAL",
+            "valor": "COM SINAL",            
+            "data": "2020-01-08 17:47:01"
           },
           {            
-            "periferico": "Loren Ipsum 3",
-            "evento": "Loren Ipsum 4",
-            "valor": "200.000",            
-            "data": "2020-07-11 10:00:00"
+            "periferico": "BOTAO DE PANICO",
+            "evento": "EVENTO DE BOTAO DE PANICO",
+            "valor": "PANICO PRESSIONADO",            
+            "data": "2020-01-18 12:02:10"
           },
           {            
-            "periferico": "Loren Ipsum 5",
-            "evento": "Loren Ipsum 6",
-            "valor": "300.00",            
+            "periferico": "IGNICAO",
+            "evento": "EVENTO DE IGNICAO",
+            "valor": "IGNICAO LIGADA",            
             "data": "2020-07-12 20:00:00"
           }
         ]

@@ -10,6 +10,7 @@ var cors = require('cors');
 
 
 var alvosRouter = require('./routes/alvos');
+var telasRouter = require('./routes/telas');
 var atuadoresRouter = require('./routes/veiculos/atuadores');
 var macrosRouter = require('./routes/informacoes_recebidas/macros');
 var temposRouter = require('./routes/informacoes_recebidas/tempos');
@@ -37,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/', indexRouter);
 
 app.use('/locais', alvosRouter);
+app.use('/telas', telasRouter);
 app.use('/veiculos/atuadores', atuadoresRouter);
 app.use('/informacoes_recebidas/macros_enviadas_motorista', macrosRouter);
 app.use('/informacoes_recebidas/tempos', temposRouter);

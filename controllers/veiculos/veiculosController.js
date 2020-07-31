@@ -24,13 +24,20 @@ exports.findPlaca = function(req, res, next) {
                 "telefone": "Telefone Loren",	
                 "radio": "Radion Loren",                
                 "tipo_veiculo_cliente": "Tipo Veic Cliente Loren",
-                "cd_origem": "CD Origem Loren",
-                "transportador_padrao": "Transp Padrão Loren",
+                "cd_origem": "CD Origem Loren",                
                 "motorista_padrao": "Motorista Loren",
                 "tipo_veiculo":  "Tipo Veiculo Loren",
                 "fabricante": "Fabricante Loren",                
                 "modelo": "Modelo Loren",
                 "ctec_numero": 4,
+                "estado": "SP",
+                "cidade": "São Paulo",
+                "mortorista_padrao": {
+                    "nome": "Profissional Lorem"
+                },
+                "transportador_padrao": {
+                    "razao_social": "Razão Social Lorem"
+                },
                 "tecnologia": {
                     "codigo": 1,
                     "descricao": "Tecnologia Lorem"

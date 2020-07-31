@@ -11,6 +11,7 @@ exports.findPlaca = function(req, res, next) {
     let veiculo = {
         "data": {
             "veiculo": {
+                "codigo": 1,
                 "placa": "AAA1010",
                 "tipo_veiculo": "Tipo Veiculo Loren",                
                 "renavam": "Renavan Lorem",
@@ -29,7 +30,11 @@ exports.findPlaca = function(req, res, next) {
                 "tipo_veiculo":  "Tipo Veiculo Loren",
                 "fabricante": "Fabricante Loren",                
                 "modelo": "Modelo Loren",
-                "tecnologia": "Tecn Loren",
+                "ctec_numero": 4,
+                "tecnologia": {
+                    "codigo": 1,
+                    "descricao": "Tecnologia Lorem"
+                },
                 "atuadores": [
                     "000006     ", "000003     "
                 ]

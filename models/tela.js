@@ -8,7 +8,7 @@ var telaSchema = new Schema({
     url: String,    
     sistema: String,
     fields: [{
-        _id:  Schema.Types.ObjectId,        
+        _id:  String,
         dom_id: String,
         dom_name: String,
         dom_label: String,

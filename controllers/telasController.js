@@ -1,5 +1,6 @@
 var Tela = require('../models/tela');
 var mongoose = require('mongoose');
+const { v4: uuidv4 } = require('uuid');
 require('dotenv').config();
 
 exports.find = async function(req, res, next) {
@@ -17,7 +18,7 @@ exports.find = async function(req, res, next) {
       if(tela != null){        
         res.status(200).send(tela);
       } else {
-        res.status(404).send('Email e/ou senha inválidos!');
+        res.status(404).send('Tela não encontrada.');
       }
     })
     .catch((err)=>{
@@ -25,7 +26,6 @@ exports.find = async function(req, res, next) {
         res.status(500).send({erro: err});               
     })                         
 };
-
 
 exports.add = async function(req, res, next) {    
     console.log('req.body', req.body);
@@ -40,11 +40,13 @@ exports.add = async function(req, res, next) {
         .then((tela)=>{
             if(tela != null){        
                 let field = {
+                    _id = uuidv4(),
                     dom_id: req.body.dom_id,
                     dom_name: req.body.dom_name,
                     dom_label: req.body.dom_label,
                     dom_title: req.body.dom_title,
                     dom_class: req.body.dom_class,
+                    dom_tag: req.body.dom_tag,
                     redmine_issue_id: req.body.input_link_redmine,
                     status: req.body.status,
                     request: {

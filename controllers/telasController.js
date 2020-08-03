@@ -1,6 +1,5 @@
 var Tela = require('../models/tela');
 var mongoose = require('mongoose');
-const { v4: uuidv4 } = require('uuid');
 require('dotenv').config();
 
 exports.find = async function(req, res, next) {
@@ -39,15 +38,14 @@ exports.add = async function(req, res, next) {
         Tela.findOne({_id: req.params.idTela})
         .then((tela)=>{
             if(tela != null){        
-                let field = {
-                    _id = uuidv4(),
+                let field = {                    
                     dom_id: req.body.dom_id,
                     dom_name: req.body.dom_name,
                     dom_label: req.body.dom_label,
                     dom_title: req.body.dom_title,
                     dom_class: req.body.dom_class,
                     dom_tag: req.body.dom_tag,
-                    redmine_issue_id: req.body.input_link_redmine,
+                    redmine_issue_id: req.body.redmine_issue_id,
                     status: req.body.status,
                     request: {
                         property: req.body.swagger_prop_req_name
@@ -56,8 +54,7 @@ exports.add = async function(req, res, next) {
                         property: req.body.swagger_prop_resp_name,
                         endpoint: req.body.input_link_resp_swagger
                     }            
-                }
-                console.log('field', field);
+                }                
 
                 tela.fields.push(field);
                 tela.save();
@@ -77,36 +74,39 @@ exports.add = async function(req, res, next) {
     }
 };
 
-exports.update = async function(req, res, next) {    
+exports.update = async function(req, res, next) {
     try{
         mongoose.connect(process.env.BUONNY_EXT_ESTRANG_DB, function (err) {    
             if (err) throw err;    
             console.log('Successfully connected');                
-        });  
-                
-        Tela.findOneAndUpdate({url: req.query.url, fields: {$elemMatch: {_id: req.body.idField}}},
-        {
-            $set: {
+       });  
+
+       console.log('req.params.idField', req.params.idField);
+       Tela.update({'fields._id': req.params.idField}, {
+           '$set': {                                
                 'fields.$.dom_id': req.body.dom_id,
                 'fields.$.dom_name': req.body.dom_name,
                 'fields.$.dom_label': req.body.dom_label,
                 'fields.$.dom_title': req.body.dom_title,
                 'fields.$.dom_class': req.body.dom_class,
-                'fields.$.redmine_issue_id': req.body.input_link_redmine,
+                'fields.$.dom_tag': req.body.dom_tag,
+                'fields.$.redmine_issue_id': req.body.redmine_issue_id,
                 'fields.$.status': req.body.status,
-                'fields.$.request.property': req.body.swagger_prop_req_name,
-                'fields.$.response.property': req.body.swagger_prop_resp_name,
-                'fields.$.response.endpoint': req.body.input-link_resp_swagger            
-            }
-        }, // list fields you like to change
-        {'new': true, 'safe': true, 'upsert': true})
-        .then((field)=>{
-            res.status(200).send(field);        
+                'fields.$.request': {
+                    property: req.body.swagger_prop_req_name
+                },
+                'fields.$.response': {
+                    property: req.body.swagger_prop_resp_name,
+                    endpoint: req.body.input_link_resp_swagger
+                }
+        }})
+        .then((field)=>{            
+            res.status(200).send(field);
         })
         .catch((err)=>{
             console.log('err', err);
             res.status(500).send({erro: err});               
-        })        
+        })                            
     }    
     catch (err){
         res.status(500).send({erro: err});

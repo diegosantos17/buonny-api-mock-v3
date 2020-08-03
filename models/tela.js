@@ -7,8 +7,7 @@ var telaSchema = new Schema({
     nome: String,
     url: String,    
     sistema: String,
-    fields: [{
-        _id:  String,
+    fields: [{        
         dom_id: String,
         dom_name: String,
         dom_label: String,

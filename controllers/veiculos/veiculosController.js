@@ -32,7 +32,7 @@ exports.findPlaca = function(req, res, next) {
                 "ctec_numero": 4,
                 "estado": "SP",
                 "cidade": "São Paulo",
-                "mortorista_padrao": {
+                "motorista_padrao": {
                     "nome": "Profissional Lorem"
                 },
                 "transportador_padrao": {

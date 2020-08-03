@@ -8,7 +8,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 
-
 var alvosRouter = require('./routes/alvos');
 var telasRouter = require('./routes/telas');
 var veiculosRouter = require('./routes/veiculos/veiculos');
@@ -48,11 +47,8 @@ app.use('/informacoes_recebidas/eventos', eventosRouter);
 app.use('/informacoes_recebidas/mensagens_livres', mensagensRouter);
 app.use('/informacoes_recebidas/mensagens_recebidas', mensagensRecebidasRouter);
 app.use('/informacoes_recebidas/sensores', sensoresRouter);
-
 app.use('/informacoes_enviadas/envios', enviosRouter);
-
 app.use('/authentications', authenticationsRouter);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

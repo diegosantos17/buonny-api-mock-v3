@@ -15,6 +15,7 @@ var telaSchema = new Schema({
         dom_class: String,
         dom_title: String,
         redmine_issue_id: String,
+        status: String,
         request: {
             property: String
         },

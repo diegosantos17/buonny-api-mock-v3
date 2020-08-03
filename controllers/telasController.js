@@ -4,6 +4,7 @@ require('dotenv').config();
 
 exports.find = async function(req, res, next) {
             
+    console.log(process.env.BUONNY_EXT_ESTRANG_DB);
     mongoose.connect(process.env.BUONNY_EXT_ESTRANG_DB, function (err) {
     
         if (err) throw err;
@@ -27,41 +28,47 @@ exports.find = async function(req, res, next) {
 
 
 exports.add = async function(req, res, next) {    
+    console.log('req.body', req.body);
+
     try{
         mongoose.connect(process.env.BUONNY_EXT_ESTRANG_DB, function (err) {    
             if (err) throw err;    
             console.log('Successfully connected');                
         });  
-        
-        let field = {
-            dom_id: req.body.dom_id,
-            dom_name: req.body.dom_name,
-            dom_label: req.body.dom_label,
-            dom_title: req.body.dom_title,
-            dom_class: req.body.dom_class,
-            redmine_issue_id: req.body.input_link_redmine,
-            status: req.body.status,
-            request: {
-                property: req.body.swagger_prop_req_name
-            },
-            response: {
-                property: req.body.swagger_prop_resp_name,
-                endpoint: req.body.input-link_resp_swagger
-            }            
-        }
-        Tela.update(
-            { _id: req.body.idTela }, 
-            { $push: { fields: field } },
-            function (error, success) {
-                if (error) {
-                    console.log(error);
-                    res.status(500).send(error);        
-                } else {                    
-                    console.log(success);
-                    res.status(200).send(field);
+
+        Tela.findOne({_id: req.params.idTela})
+        .then((tela)=>{
+            if(tela != null){        
+                let field = {
+                    dom_id: req.body.dom_id,
+                    dom_name: req.body.dom_name,
+                    dom_label: req.body.dom_label,
+                    dom_title: req.body.dom_title,
+                    dom_class: req.body.dom_class,
+                    redmine_issue_id: req.body.input_link_redmine,
+                    status: req.body.status,
+                    request: {
+                        property: req.body.swagger_prop_req_name
+                    },
+                    response: {
+                        property: req.body.swagger_prop_resp_name,
+                        endpoint: req.body.input_link_resp_swagger
+                    }            
                 }
+                console.log('field', field);
+
+                tela.fields.push(field);
+                tela.save();
+
+                res.status(200).send(tela);
+            } else {
+                res.status(404).send('Tela não encontrada!');
             }
-        );                
+        })
+        .catch((err)=>{
+            console.log('err', err);
+            res.status(500).send({erro: err});               
+        })                            
     }    
     catch (err){
         res.status(500).send({erro: err});

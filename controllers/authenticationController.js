@@ -20,11 +20,7 @@ exports.login = async function(req, res, next) {
 
     User.findOne({email: req.body.email})
     .then((user)=>{
-      if(user != null){
-        // bcrypt.hash(req.body.password, saltRounds, (err, encrypted) => {
-        //   req.body.password = encrypted
-        //   next()
-        // })
+      if(user != null){        
                 
         bcrypt.compare(req.body.password, user.password, function (err, result) {
           if (result == true) {
@@ -49,6 +45,5 @@ exports.login = async function(req, res, next) {
 };
 
 exports.logout = function(req, res) {
-
     res.status(200).send({ auth: false, token: null });
 };

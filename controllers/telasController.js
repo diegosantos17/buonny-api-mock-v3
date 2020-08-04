@@ -1,6 +1,8 @@
 var Tela = require('../models/tela');
 var mongoose = require('mongoose');
+var _ = require('lodash');
 require('dotenv').config();
+var uuid = require('uuid-random');
 
 exports.find = async function(req, res, next) {
             
@@ -38,7 +40,9 @@ exports.add = async function(req, res, next) {
         Tela.findOne({_id: req.params.idTela})
         .then((tela)=>{
             if(tela != null){        
+                let uuidField = uuid();
                 let field = {                    
+                    uuid: uuidField,
                     dom_id: req.body.dom_id,
                     dom_name: req.body.dom_name,
                     dom_label: req.body.dom_label,
@@ -59,7 +63,9 @@ exports.add = async function(req, res, next) {
                 tela.fields.push(field);
                 tela.save();
 
-                res.status(200).send(tela);
+                let fieldDb = _.findLast(tela.fields);
+
+                res.status(200).send(fieldDb);
             } else {
                 res.status(404).send('Tela não encontrada!');
             }

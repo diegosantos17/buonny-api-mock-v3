@@ -50,7 +50,7 @@ app.use('/informacoes_recebidas/mensagens_livres', mensagensRouter);
 app.use('/informacoes_recebidas/mensagens_recebidas', mensagensRecebidasRouter);
 app.use('/informacoes_recebidas/sensores', sensoresRouter);
 app.use('/informacoes_enviadas/envios', enviosRouter);
-app.use('/authentications', authenticationsRouter);
+app.use('/auth', authenticationsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

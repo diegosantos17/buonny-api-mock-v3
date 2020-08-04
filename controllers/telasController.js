@@ -7,8 +7,7 @@ var uuid = require('uuid-random');
 exports.find = async function(req, res, next) {
             
     console.log(process.env.BUONNY_EXT_ESTRANG_DB);
-    mongoose.connect(process.env.BUONNY_EXT_ESTRANG_DB, function (err) {
-    
+    mongoose.connect(process.env.BUONNY_EXT_ESTRANG_DB, function (err) {    
         if (err) throw err;
     
         console.log('Successfully connected');                

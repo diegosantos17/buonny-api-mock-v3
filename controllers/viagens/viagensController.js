@@ -11,17 +11,17 @@ exports.find = function(req, res, next) {
                 {
                     "sm": 23670669,
                     "placa": "LLQ-9562",
-                    "situacao": "normal",
+                    "em_movimento": true,
                     "pedido": 951673,
-                    "status": "em_viagem",
+                    "status": "Normal",
                     "alertas": {
                     "resolvidos": 0,
                     "total": 2
                     },
                     "mensagens": 10,
                     "transportador": {                    
-                    "codigo": 10,
-                    "nome": "EXPRESSO LOCATADA LTDA - ME"
+                        "codigo": 10,
+                        "razao_social": "EXPRESSO LOCATADA LTDA - ME"
                     },
                     "origem": {
                     "cidade": {
@@ -85,9 +85,9 @@ exports.find = function(req, res, next) {
                 {
                     "sm": 23670669,
                     "placa": "LLQ-9562",
-                    "situacao": "normal",
-                    "pedido": 951673,
-                    "status": "em_viagem",
+                    "status": "Atrasado",
+                    "em_movimento": false,
+                    "pedido": 951673,                    
                     "alertas": {
                         "resolvidos": 0,
                         "total": 2
@@ -95,7 +95,7 @@ exports.find = function(req, res, next) {
                     "mensagens": 10,
                     "transportador": {                    
                         "codigo": 11,
-                        "nome": "SANTOS MUNIZ TRANSPORTE RODOVIÁRIO DE CARGAS LTDA"
+                        "razao_social": "SANTOS MUNIZ TRANSPORTE RODOVIÁRIO DE CARGAS LTDA"
                     },
                     "origem": {
                         "cidade": {

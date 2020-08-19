@@ -12,6 +12,7 @@ var alvosRouter = require('./routes/alvos');
 var telasRouter = require('./routes/telas');
 var fieldsRouter = require('./routes/fields');
 var veiculosRouter = require('./routes/veiculos/veiculos');
+var viagensRouter = require('./routes/viagens/viagens');
 var atuadoresRouter = require('./routes/veiculos/atuadores');
 var macrosRouter = require('./routes/informacoes_recebidas/macros');
 var temposRouter = require('./routes/informacoes_recebidas/tempos');
@@ -51,6 +52,8 @@ app.use('/informacoes_recebidas/mensagens_recebidas', mensagensRecebidasRouter);
 app.use('/informacoes_recebidas/sensores', sensoresRouter);
 app.use('/informacoes_enviadas/envios', enviosRouter);
 app.use('/auth', authenticationsRouter);
+app.use('/viagens', viagensRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

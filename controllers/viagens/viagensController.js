@@ -166,3 +166,107 @@ exports.find = function(req, res, next) {
         
         res.end(JSON.stringify(viagens));
 };    
+
+exports.findAlertas = function(req, res, next) {        
+    let alertas = {
+    "data": {
+      "alertas": [
+        {
+          "codigo": 1,
+          "data": "19/08/2020 10:00",
+          "codigo_sm": 23670669,
+          "tipo": {
+            "codigo": 1,
+            "descricao": "Tipo 1"
+          },
+          "veiculo": {
+            "codigo": 10,
+            "placa": "LLQ-9562"
+          }
+        },
+        {
+            "codigo": 2,
+            "data": "18/08/2020 14:00",
+            "codigo_sm": 23670700,
+            "tipo": {
+              "codigo": 2,
+              "descricao": "Tipo 2"
+            },
+            "veiculo": {
+              "codigo": 20,
+              "placa": "AAA-1010"
+            }
+          }
+      ]
+    },
+    "message": {},
+    "paging": {
+      "finder": "string",
+      "page": 0,
+      "current": 0,
+      "count": 0,
+      "perPage": 0,
+      "start": 0,
+      "end": 0,
+      "prevPage": true,
+      "nextPage": true,
+      "pageCount": 0,
+      "sort": "string",
+      "direction": "string",
+      "limit": 0,
+      "sortDefault": true,
+      "directionDefault": true,
+      "scope": "string",
+      "completeSort": [
+        null
+      ]
+    }
+  }
+
+  res.end(JSON.stringify(alertas));
+}
+
+exports.findFiltros = function(req, res, next) {        
+    let filtros = {
+    "data": {
+      "filtros": [
+        {
+            "codigo": 1,
+            "descricao": "Meu Filtro 1"
+        },
+        {
+            "codigo": 2,
+            "descricao": "Meu Filtro 2"
+        },
+        {
+            "codigo": 3,
+            "descricao": "Meu Filtro 3"
+        }
+      ]
+    },
+    "message": {},
+    "paging": {
+      "finder": "string",
+      "page": 0,
+      "current": 0,
+      "count": 0,
+      "perPage": 0,
+      "start": 0,
+      "end": 0,
+      "prevPage": true,
+      "nextPage": true,
+      "pageCount": 0,
+      "sort": "string",
+      "direction": "string",
+      "limit": 0,
+      "sortDefault": true,
+      "directionDefault": true,
+      "scope": "string",
+      "completeSort": [
+        null
+      ]
+    }
+  }
+
+  res.end(JSON.stringify(filtros));
+}
